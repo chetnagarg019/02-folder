@@ -3,6 +3,7 @@ import React from 'react'
 const App = () => {
 
   function handleClick(){
+   console.log("Data aa gya");
    
   }
 
