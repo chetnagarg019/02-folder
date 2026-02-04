@@ -1,71 +1,3 @@
-// import React, {  useState } from 'react'
-
-// const App = () => {
-
-//   const [user, setUser] = useState('');
-//   const [details, setDetails] = useState('');
-//   const [task, setTasks]  = useState([])
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // console.log(user,details);
-//     const copyTask = [...task];
-//     copyTask.push({user,details});
-//     setTasks(copyTask);
-//     // console.log(copyTask);
-//     console.log(task);
-    
-    
-//     setUser('');
-//     setDetails('');
-
-//   }
-
-//   const delteTask = (index) => {
-//     const copyTask = [...task];
-//     copyTask.splice(index,1);
-//     setTasks(copyTask);
-//   }
-  
-//   return (
-//     <div>
-//       <form className='flex flex-col border-2 gap-4' onSubmit={handleSubmit}>
-//         <div>
-//         <input type="text"  value = {user}placeholder='Enter heading' onChange={(e) => setUser(e.target.value)}
-//  className='px-4 py-2 bg-pink-200 border-2 rounded' />
-//         <textarea type="text" value={details} placeholder='Enter details' onChange={(e) => setDetails(e.target.value)}
-//  className='px-2 py-8 bg-pink-200 border-2 rounded' />
-//         <button className='border-2 '>Submit</button>
-//         </div>
-//         {/* <img className='w-1/2' src="https://cdn-icons-png.flaticon.com/512/2038/2038509.png" alt="" /> */}
-//       </form>
-
-//       <div className='lg:w-1/2 lg:border-l-2 p-10'>
-//         <h1 className='text-4xl font-bold'>Notes here</h1>
-//         <div className='flex flex-wrap gap-5 mt-5 h-full overflow-auto'>
-//         {task.map(function(ele,index){
-//           return <div key={index} className="h-52 w-40 rounded-xl bg-cover bg-[url('https://static.vecteezy.com/system/resources/previews/037/152/677/non_2x/sticky-note-paper-background-free-png.png')]">
-//             <h3 className='text-green-300 text-2xl font-bold px-4 mt-4  py-1.5'>{ele.user}</h3>
-//             <p className='text-green-300  text-md  font-medium px-2 py-1.5'>{ele.details}</p>
-//             <button className='border-2  bg-amber-200 cursor-pointer' onClick={() => {
-//               delteTask(index)
-//             }}>Delete Task</button>
-//           </div>
-//         })}
-          
-
-
-//         </div>
-
-
-//       </div>
-      
-//     </div>
-//   )
-// }
-
-// export default App
-
 import React, { useState } from 'react'
 
 const App = () => {
@@ -80,6 +12,23 @@ const App = () => {
     setUser('');
     setDetails('');
   }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // console.log(user,details);
+  //   const copyTask = [...task];
+  //   copyTask.push({user,details});
+  //   setTasks(copyTask);
+  //   // console.log(copyTask);
+  //   console.log(task);
+    
+    
+  //   setUser('');
+  //   setDetails('');
+
+  // // }
+
+  
 
   const delteTask = (index) => {
     const copyTask = [...task];
@@ -120,7 +69,7 @@ const App = () => {
             required
           />
 
-          <button className="mt-auto bg-indigo-600 hover:bg-indigo-700 transition py-2 rounded font-semibold">
+          <button className="mt-auto bg-indigo-600 hover:bg-indigo-700 transition py-2 rounded font-semibold cursor-pointer">
             Add Note
           </button>
         </form>
@@ -139,13 +88,13 @@ const App = () => {
                   {ele.user}
                 </h3>
 
-                <p className="text-sm text-gray-300 mt-1 break-words">
+                <p className="text-sm text-gray-300 mt-1 ">
                   {ele.details}
                 </p>
 
                 <button
                   onClick={() => delteTask(index)}
-                  className="absolute top-2 right-2 text-xs text-gray-400 hover:text-red-400"
+                  className="absolute top-2 right-2 text-xs text-gray-400 hover:text-red-400 cursor-pointer"
                 >
                   ✕
                 </button>
