@@ -1,55 +1,75 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const App = () => {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const[data,setData] = useState([]);
+  const fetchImages = async () => {
+    const res = await axios.get(
+      `https://picsum.photos/v2/list?page=${page}&limit=10`
+    );
+    setData(res.data);
+  };
 
-  const Click = async () => {
-    const responce =  await axios.get('https://picsum.photos/v2/list?page=3&limit=40');
-    setData(responce.data); 
-  }
-
-  let imagesData = 'No data available'
-
-  if(data.length > 0){
-    imagesData = data.map(function(ele,idx){
-
-     return (
-  <div
-    key={idx}
-    className="h-44 w-44 overflow-hidden rounded-lg"
-  >
-    <a href={ele.url}>
-    <img
-      src={ele.download_url}
-      alt={ele.author}
-      className="h-full w-full object-cover"
-    />
-    <h1>{ele.author}</h1>
-    </a>
-  </div>
-);
-
-
-    })
-  }
-
-
-
-
+  useEffect(() => {
+    fetchImages();
+  }, [page]);
 
   return (
-  <>
-  <button onClick={Click} className='px-2 py-1.5 bg-amber-300 border-2 rounded-2xl mt-4'>Start</button>
+    <div className="h-screen w-screen bg-gray-100 p-2 overflow-hidden">
 
-  <div className='flex flex-wrap gap-3 mt-4'>
-{imagesData}
+      {/* GRID */}
+      <div className="grid grid-cols-5 grid-rows-2 gap-2 h-[85%]">
+        {data.map((img) => (
+          <div
+            key={img.id}
+            className="relative rounded-lg overflow-hidden group"
+          >
+            <img
+              src={img.download_url}
+              alt={img.author}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+            />
 
-  </div>
-  
-  </>
-  )
-}
+            {/* Hover author */}
+            <div className="absolute inset-0 bg-black/60 
+                            flex items-center justify-center
+                            opacity-0 group-hover:opacity-100 transition">
+              <span className="text-white text-xs font-semibold">
+                {img.author}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
 
-export default App
+      {/* CONTROLS */}
+      <div className="flex justify-between items-center h-[15%] px-4">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage(page - 1)}
+          className={`px-4 py-1.5 rounded-full text-sm
+            ${
+              page === 1
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-indigo-600 text-white hover:bg-indigo-700"
+            }`}
+        >
+          Prev
+        </button>
+
+        <span className="font-semibold text-sm">Page {page}</span>
+
+        <button
+          onClick={() => setPage(page + 1)}
+          className="px-4 py-1.5 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default App;
