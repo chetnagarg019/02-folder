@@ -49,7 +49,7 @@ const App = () => {
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
-          className={`px-4 py-1.5 rounded-full text-sm
+          className={`px-4 py-1.5 rounded-full text-sm cursor-pointer
             ${
               page === 1
                 ? "bg-gray-300 cursor-not-allowed"
@@ -63,9 +63,9 @@ const App = () => {
 
         <button
           onClick={() => setPage(page + 1)}
-          className="px-4 py-1.5 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700"
+          className="px-4 py-1.5 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 cursor-pointer"
         >
-          Next
+          Next 
         </button>
       </div>
     </div>
